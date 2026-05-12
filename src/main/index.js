@@ -35,7 +35,16 @@ const WINDOW_CONFIG = {
   height: 800,
   minWidth:  900,
   minHeight: 600,
-  titleBarStyle: 'hiddenInset', // macOS: native traffic-light buttons
+  titleBarStyle: 'hiddenInset',  // macOS: native traffic-light buttons
+
+  // ── Prevent white flash on startup ──────────────────────────────────────
+  // show: false means the OS window is created but stays invisible until the
+  // renderer signals it is ready (see ready-to-show below).
+  // backgroundColor matches the Lumonus dark canvas so if anything peeks
+  // through before paint it will be dark, not white.
+  show:            false,
+  backgroundColor: '#07080d',
+
   webPreferences: {
     preload:          PRELOAD_PATH,
     contextIsolation: true,   // ✅ security: renderer can't access Node APIs directly
@@ -56,6 +65,11 @@ function createWindow() {
 
   // Remove the default menu bar (we ship our own header/toolbar in React)
   win.setMenuBarVisibility(false);
+
+  // ── Show window only when the renderer is fully painted ──────────────────
+  // This eliminates the white flash: the window stays hidden while the asar
+  // is being read and React is mounting, then appears already rendered.
+  win.once('ready-to-show', () => win.show());
 
   if (VITE_DEV_URL) {
     win.loadURL(VITE_DEV_URL);
