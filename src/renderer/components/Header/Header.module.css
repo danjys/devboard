@@ -1,0 +1,158 @@
+/* ── Header ──────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 var(--space-5);
+  background: var(--color-sidebar-bg);
+  border-bottom: 1px solid var(--color-sidebar-border);
+  flex-shrink: 0;
+  -webkit-app-region: drag;
+  user-select: none;
+  position: relative;
+}
+
+.header button,
+.header a { -webkit-app-region: no-drag; }
+
+/* ── Left (traffic-light clearance + brand logo) ─────────────────────────── */
+
+.left {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0;
+}
+
+/* 72 px clears the macOS stoplight cluster */
+.trafficLightSpacer { width: 72px; flex-shrink: 0; }
+
+/* ── Centre ──────────────────────────────────────────────────────────────── */
+
+.centre {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.pageTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: rgba(232, 234, 245, 0.5);
+  letter-spacing: 0.01em;
+}
+
+/* Tiny separator dot */
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(232, 234, 245, 0.18);
+  flex-shrink: 0;
+}
+
+.progressWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.progressTrack {
+  width: 80px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-teal));
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow);
+}
+
+.progressLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: rgba(232, 234, 245, 0.3);
+  letter-spacing: 0.02em;
+}
+
+/* ── Right ───────────────────────────────────────────────────────────────── */
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.version {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.18);
+  padding: 2px 7px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-full);
+  letter-spacing: 0.03em;
+}
+
+/* Icon-only theme toggle */
+.iconBtn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(232, 234, 245, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast),
+              border-color var(--transition-fast);
+}
+.iconBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(232, 234, 245, 0.9);
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+/* ── Lumonus outlined CTA  ───────────────────────────────────────────────── */
+/* Matches lumonus.com "Book a Call" style:
+   transparent bg · purple border · purple text · ghost hover fill            */
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast),
+              transform var(--transition-fast);
+}
+
+.addBtn:hover {
+  background: var(--color-primary-surface);
+  box-shadow: 0 0 12px var(--color-primary-glow);
+}
+
+.addBtn:active {
+  transform: scale(0.97);
+}
+
+/* Light theme — border stays purple, bg white-ish on hover */
+[data-theme='light'] .addBtn:hover {
+  background: rgba(109, 66, 245, 0.06);
+  box-shadow: 0 0 10px rgba(109, 66, 245, 0.12);
+}

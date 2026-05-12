@@ -1,0 +1,86 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# .github/workflows/update-docs.yml
+#
+# Auto-Documentation Pipeline
+#
+# Triggers after a successful CI run on `main`.
+# Runs `npm run update-docs` which:
+#   • Scans src/renderer/components, context, and hooks
+#   • Rewrites docs/architecture.mmd (Mermaid diagram)
+#   • Rewrites docs/architecture.md  (human-readable guide)
+#
+# If either file changed, the bot commits and pushes the update back to `main`
+# with the message "docs: auto-update architecture [skip ci]".
+#
+# The "[skip ci]" token prevents an infinite loop — GitHub will not re-trigger
+# CI for commits that contain this string.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Update Docs
+
+on:
+  # Run after CI passes on main (not on forks / PRs)
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+
+  # Also allow manual triggering from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  update-docs:
+    name: Regenerate architecture docs
+    # Only run if CI succeeded (skip if it failed)
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to push the updated docs
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          # Use the default GITHUB_TOKEN — it has push access to the same repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run update-docs script
+        run: npm run update-docs
+
+      # ── Check if anything changed ──────────────────────────────────────
+      - name: Check for changes
+        id: diff
+        run: |
+          git diff --quiet docs/ && echo "changed=false" >> "$GITHUB_OUTPUT" \
+                                 || echo "changed=true"  >> "$GITHUB_OUTPUT"
+
+      # ── Commit & push only if docs changed ────────────────────────────
+      - name: Commit updated docs
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/architecture.mmd docs/architecture.md
+          git commit -m "docs: auto-update architecture diagrams [skip ci]
+
+          Updated by scripts/update-docs.js
+          Triggered by: ${{ github.event.workflow_run.head_commit.message || 'manual dispatch' }}
+          Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          git push origin main
+
+      - name: No changes detected
+        if: steps.diff.outputs.changed == 'false'
+        run: echo "ℹ️ No documentation changes detected — skipping commit."

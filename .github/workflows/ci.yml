@@ -1,0 +1,106 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# .github/workflows/ci.yml
+#
+# CI Pipeline — runs on every push and pull-request targeting `main`.
+#
+# Jobs:
+#   lint    – ESLint (fails on warnings too, so the codebase stays clean)
+#   test    – Vitest unit tests
+#   build   – Vite renderer build (ensures the app compiles without errors)
+#
+# All three jobs run in parallel.  The workflow is considered "green" only
+# when all three pass.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel any in-progress run for the same branch/PR when a new commit is pushed
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ── Lint ─────────────────────────────────────────────────────────────────
+  lint:
+    name: Lint (ESLint)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+  # ── Test ──────────────────────────────────────────────────────────────────
+  test:
+    name: Unit Tests (Vitest)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 7
+
+  # ── Build ─────────────────────────────────────────────────────────────────
+  build:
+    name: Renderer Build (Vite)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build renderer
+        # Only build the Vite/React part — we don't need a full Electron build in CI
+        run: npx vite build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: renderer-dist
+          path: dist/
+          retention-days: 3

@@ -1,0 +1,62 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+  background: var(--color-primary-surface);
+}
+
+.chip.active {
+  background: var(--color-primary-surface);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Priority colour variants when active */
+.chip.high.active   { border-color: var(--color-priority-high);   color: var(--color-priority-high);   background: var(--color-danger-surface); }
+.chip.medium.active { border-color: var(--color-priority-medium); color: var(--color-priority-medium); background: var(--color-warning-surface); }
+.chip.low.active    { border-color: var(--color-priority-low);    color: var(--color-priority-low);    background: var(--color-success-surface); }
+
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chip.high   .dot { background: var(--color-priority-high);   }
+.chip.medium .dot { background: var(--color-priority-medium); }
+.chip.low    .dot { background: var(--color-priority-low);    }
+
+.chipLabel { line-height: 1; }
+
+.chipCount {
+  background: var(--color-surface-2);
+  border-radius: var(--radius-full);
+  padding: 0 5px;
+  font-size: 10px;
+  min-width: 18px;
+  text-align: center;
+  line-height: 16px;
+  height: 16px;
+}

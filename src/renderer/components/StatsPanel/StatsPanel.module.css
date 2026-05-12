@@ -1,0 +1,204 @@
+.panel {
+  padding: var(--space-6);
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+
+.panelHeader { display: flex; flex-direction: column; gap: 4px; }
+
+.title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  letter-spacing: -0.5px;
+}
+
+.subtitle { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+/* ── KPI grid ────────────────────────────────────────────────────────────── */
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+.kpiCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  border-top: 3px solid var(--kpi-accent);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kpiValue {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--kpi-accent);
+  line-height: 1;
+}
+
+.kpiLabel {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.kpiSub { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+/* ── Cards row ───────────────────────────────────────────────────────────── */
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.cardTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-4);
+}
+
+/* ── Progress bars ───────────────────────────────────────────────────────── */
+
+.progressList { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.progressRow { display: flex; flex-direction: column; gap: var(--space-1); }
+
+.progressMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progressLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.progressDot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+.progressCount {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.progressPct { font-weight: var(--font-weight-normal); color: var(--color-text-muted); }
+
+.progressTrack {
+  height: 6px;
+  background: var(--color-surface-2);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 4px;
+}
+
+/* ── Completion ring ─────────────────────────────────────────────────────── */
+
+.completionRing {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-top: var(--space-5);
+  margin-left: auto;
+}
+
+.ringLabel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.ringPct {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-col-done);
+  line-height: 1;
+}
+
+.ringText {
+  font-size: var(--text-2xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Activity feed ───────────────────────────────────────────────────────── */
+
+.activityList { display: flex; flex-direction: column; gap: 0; }
+
+.activityItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.activityItem:last-child { border-bottom: none; }
+
+.activityDot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.activityContent { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+
+.activityTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.activityMeta { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+.empty { font-size: var(--text-sm); color: var(--color-text-muted); text-align: center; padding: var(--space-6) 0; }

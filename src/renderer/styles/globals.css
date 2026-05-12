@@ -1,0 +1,191 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   globals.css  ·  Lumonus Design System
+   Brand: dark, high-contrast, AI-health — purple · teal · salmon
+   Font: Inter (loaded via Google Fonts in index.html)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Lumonus Light theme ───────────────────────────────────────────────────── */
+:root,
+[data-theme='light'] {
+  /* Canvas */
+  --color-bg:             #f0f2f8;
+  --color-surface:        #ffffff;
+  --color-surface-2:      #f5f6fb;
+  --color-surface-hover:  #eceef6;
+  --color-border:         #dde0f0;
+  --color-border-subtle:  #eceef6;
+
+  /* Text */
+  --color-text:           #0d0e1a;
+  --color-text-muted:     #6b7280;
+  --color-text-subtle:    #9ca3af;
+
+  /* Lumonus brand purple */
+  --color-primary:        #6d42f5;
+  --color-primary-hover:  #7c5cfc;
+  --color-primary-glow:   rgba(109, 66, 245, 0.18);
+  --color-primary-surface:rgba(109, 66, 245, 0.07);
+
+  /* Teal accent */
+  --color-teal:           #0891b2;
+  --color-teal-surface:   rgba(8, 145, 178, 0.08);
+
+  /* Salmon/warm accent */
+  --color-salmon:         #e8530a;
+  --color-salmon-surface: rgba(232, 83, 10, 0.08);
+
+  /* Semantic */
+  --color-success:        #059669;
+  --color-success-surface:rgba(5, 150, 105, 0.08);
+  --color-danger:         #dc2626;
+  --color-danger-surface: rgba(220, 38, 38, 0.08);
+  --color-warning:        #d97706;
+  --color-warning-surface:rgba(217, 119, 6, 0.08);
+
+  /* Column accent colours */
+  --color-col-todo:       #6d42f5;
+  --color-col-doing:      #d97706;
+  --color-col-done:       #059669;
+
+  /* Priority */
+  --color-priority-high:    #dc2626;
+  --color-priority-medium:  #d97706;
+  --color-priority-low:     #059669;
+
+  /* Sidebar */
+  --color-sidebar-bg:     #0d0f1e;
+  --color-sidebar-surface:#13152a;
+  --color-sidebar-text:   #8b93b8;
+  --color-sidebar-text-active: #e8eaf5;
+  --color-sidebar-active: rgba(109, 66, 245, 0.18);
+  --color-sidebar-active-border: #6d42f5;
+  --color-sidebar-border: rgba(255,255,255,0.06);
+
+  /* Shadows */
+  --shadow-sm:    0 1px 2px rgba(13, 14, 26, 0.06);
+  --shadow-card:  0 1px 4px rgba(13, 14, 26, 0.08), 0 0 0 1px rgba(13, 14, 26, 0.05);
+  --shadow-card-hover: 0 4px 16px rgba(109, 66, 245, 0.12), 0 0 0 1px rgba(109, 66, 245, 0.12);
+  --shadow-modal: 0 20px 60px rgba(13, 14, 26, 0.3);
+  --shadow-focus: 0 0 0 3px rgba(109, 66, 245, 0.25);
+
+  /* Spacing */
+  --space-1: 4px;  --space-2: 8px;   --space-3: 12px;
+  --space-4: 16px; --space-5: 20px;  --space-6: 24px;
+  --space-8: 32px; --space-10: 40px; --space-12: 48px;
+
+  /* Typography — Inter is the Lumonus typeface */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  --text-2xs: 10px; --text-xs: 11px; --text-sm: 13px; --text-base: 14px;
+  --text-lg: 16px;  --text-xl: 20px; --text-2xl: 24px; --text-3xl: 30px;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Outlined (ghost) button — Lumonus brand style */
+  --btn-outline-border: 1.5px solid var(--color-primary);
+  --btn-outline-color:  var(--color-primary);
+  --btn-outline-bg:     transparent;
+  --btn-outline-hover-bg: var(--color-primary-surface);
+
+  /* Radius */
+  --radius-sm: 4px; --radius-md: 8px;
+  --radius-lg: 12px; --radius-xl: 16px; --radius-full: 9999px;
+
+  /* Motion */
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 320ms ease;
+}
+
+/* ── Lumonus Dark theme (primary brand look) ──────────────────────────────── */
+[data-theme='dark'] {
+  --color-bg:             #07080d;
+  --color-surface:        #0e1018;
+  --color-surface-2:      #13151f;
+  --color-surface-hover:  #181b28;
+  --color-border:         #1f2235;
+  --color-border-subtle:  #171929;
+
+  --color-text:           #e8eaf5;
+  --color-text-muted:     #8b93b8;
+  --color-text-subtle:    #4a506b;
+
+  --color-primary:        #8b6dfd;
+  --color-primary-hover:  #a48dfe;
+  --color-primary-glow:   rgba(139, 109, 253, 0.25);
+  --color-primary-surface:rgba(139, 109, 253, 0.1);
+
+  --color-teal:           #22d3ee;
+  --color-teal-surface:   rgba(34, 211, 238, 0.08);
+
+  --color-salmon:         #fb923c;
+  --color-salmon-surface: rgba(251, 146, 60, 0.08);
+
+  --color-success:        #34d399;
+  --color-success-surface:rgba(52, 211, 153, 0.08);
+  --color-danger:         #f87171;
+  --color-danger-surface: rgba(248, 113, 113, 0.1);
+  --color-warning:        #fbbf24;
+  --color-warning-surface:rgba(251, 191, 36, 0.08);
+
+  --color-col-todo:       #8b6dfd;
+  --color-col-doing:      #fbbf24;
+  --color-col-done:       #34d399;
+
+  --color-priority-high:    #f87171;
+  --color-priority-medium:  #fbbf24;
+  --color-priority-low:     #34d399;
+
+  --color-sidebar-bg:     #05060a;
+  --color-sidebar-surface:#0a0c14;
+  --color-sidebar-text:   #6b7499;
+  --color-sidebar-text-active: #e8eaf5;
+  --color-sidebar-active: rgba(139, 109, 253, 0.15);
+  --color-sidebar-active-border: #8b6dfd;
+  --color-sidebar-border: rgba(255,255,255,0.04);
+
+  --shadow-sm:    0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-card:  0 1px 4px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
+  --shadow-card-hover: 0 4px 24px rgba(139, 109, 253, 0.2), 0 0 0 1px rgba(139, 109, 253, 0.2);
+  --shadow-modal: 0 24px 80px rgba(0,0,0,0.7);
+  --shadow-focus: 0 0 0 3px rgba(139, 109, 253, 0.35);
+}
+
+/* ── CSS reset / normalisation ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: var(--text-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss01'; /* Inter: open digits + single-story a */
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow: hidden;
+}
+
+ul, ol { list-style: none; }
+img, video, svg { display: block; max-width: 100%; }
+button, input, textarea, select { font: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-subtle); }
